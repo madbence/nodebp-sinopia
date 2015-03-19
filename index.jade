@@ -1,0 +1,120 @@
+doctype html
+html(lang='en')
+  title Private NPM using Docker
+  style
+    :stylus
+      @css {
+        @import url(http://fonts.googleapis.com/css?family=IM+Fell+English);
+        @import url(http://fonts.googleapis.com/css?family=Roboto+Slab:300);
+      }
+      h1, h2
+        font-family 'IM Fell English' serif
+      body
+        background #ECF0F1
+        color #2C3E50
+        font-family 'Roboto Slab' serif
+        font-size 40px
+        transition background 500ms
+      .step
+        width 100vw
+        height 100vh
+        text-align center
+      ul
+        display inline-block
+        margin 100px auto
+        text-align left
+      pre
+        margin 0 auto
+        text-align left
+        display inline-block
+      colors = #e67e22 #f1c40f #2ecc71 #1abc9c #3498db #9b59b6 #be643c
+      for step in 1..30
+        .impress-on-step-{step}
+          background colors[step % 7]
+  #impress
+    .step(data-x=0, data-y=0)
+      h1 private npm registry
+      p With Docker & sinopia
+    .step(data-x=1500, data-y=0)
+      h1 private packages
+      ul
+        li tarball ☹
+        li git remote ☹
+        li package ☺
+      br
+      pre.
+        $ npm install https://example.org/package.tar.gz
+    .step(data-x=3000, data-y=0)
+      h1 sinopia
+      ul
+        li zero conf
+        li private registry
+        li cache
+        li simple storage (everyone ♥ files)
+        li auth plugins
+    .step(data-x=4500, data-y=0)
+      h1 usage
+      pre.
+        $ npm i -g sinopia
+        $ sinopia
+
+
+        //$ npm set registry http://localhost:4873 
+        $ npm i my-private-package
+    .step(data-x=6000, data-y=0)
+      h1 in production?
+      ul
+        li management (backup? user management?)
+        li availability (make sure it's running)
+        li isolation (from other services)
+    .step(data-x=6000, data-y=1000)
+      h1 Docker!
+      ul
+        li containerization
+        li easy management
+        li consistent app state
+    .step(data-x=7500, data-y=0)
+      h1 docker 101
+      ul
+        li container ≈ virtual machine
+        li container ≈ isolated process
+        li container ≈ logical service
+      br
+      pre.
+        $ docker run --rm busybox echo 'hello nodebp'
+    .step(data-x=9000, data-y=0)
+      h1 containers for sinopia
+      ul
+        li (TODO: replace this list with an image)
+        li sinopia
+        li nginx
+        li data
+    .step(data-x=10500, data-y=0)
+      h1 data container & configs
+      pre.
+        $ docker run -d --name sinopia-container purpose/sinopia-container
+      p Edit the config
+      pre.
+        $ docker run -it --rm --volumes-from sinopia-container busybox vi
+    .step(data-x=10500, data-y=1000)
+      h1 service containers
+      pre.
+        $ docker run -d --name sinopia \
+                     --volumes-from sinopia-container purpose/sinopia
+
+        $ docker run -d --name sinopia-nginx \
+                     --volumes-from sinopia-container \
+                     --link sinopia:sinopia \
+                     -p 443:443 -p 80:80 \
+                     purpose/sinopia-nginx
+    .step(data-x=10500, data-y=2000)
+      h1 backup
+      p no db, just files!
+      pre.
+        $ docker run -it --rm --volumes-from sinopia-container \
+                     -v $(pwd):/backup debian:jessie \ 
+                     tar -zcvf /backup/backup.tar.gz \
+                     -C /opt/sinopia/storage @nodebp
+  script(src='http://bartaz.github.io/impress.js/js/impress.js')
+  script.
+    impress().init()
