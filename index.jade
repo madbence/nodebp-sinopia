@@ -15,18 +15,30 @@ html(lang='en')
         font-family 'Roboto Slab' serif
         font-size 40px
         transition background 500ms
+      a
+        color inherit
       .step
         width 100vw
         height 100vh
         text-align center
       ul
         display inline-block
-        margin 100px auto
+        margin 50px auto
         text-align left
+        &.links
+          font-size 0.8em
       pre
         margin 0 auto
         text-align left
         display inline-block
+      p
+        margin 0
+        margin-top 20px
+        &.me
+          font-size 0.8em
+        &.work
+          margin-top 100px
+          font-size 0.7em
       colors = #e67e22 #f1c40f #2ecc71 #1abc9c #3498db #9b59b6 #be643c
       for step in 1..30
         .impress-on-step-{step}
@@ -34,7 +46,9 @@ html(lang='en')
   #impress
     .step(data-x=0, data-y=0)
       h1 private npm registry
-      p With Docker & sinopia
+      p with docker & sinopia
+      p.me bence dányi (@madbence)
+      p.work purpose industries
     .step(data-x=1500, data-y=0)
       h1 private packages
       ul
@@ -43,78 +57,63 @@ html(lang='en')
         li package ☺
       br
       pre.
-        $ npm install https://example.org/package.tar.gz
+        $ npm install http://my-org.com/my-package.tar.gz
+
+        $ npm install git://github.com/my-org/my-package.git
+        $ npm install my-org/my-package
+
+        $ npm install @my-org/my-package
     .step(data-x=3000, data-y=0)
       h1 sinopia
       ul
         li zero conf
         li private registry
         li cache
+        li audit packages
+        li behind firewalls
         li simple storage (everyone ♥ files)
-        li auth plugins
+        li auth plugins (htpasswd, LDAP, etc.)
     .step(data-x=4500, data-y=0)
       h1 usage
       pre.
-        $ npm i -g sinopia
+        $ npm install -g sinopia
         $ sinopia
 
 
-        //$ npm set registry http://localhost:4873 
-        $ npm i my-private-package
+        $ npm install my-private-package --registry http://localhost:4873
     .step(data-x=6000, data-y=0)
       h1 in production?
       ul
-        li management (backup? user management?)
-        li availability (make sure it's running)
-        li isolation (from other services)
+        li management
+        li availability
+        li isolation
     .step(data-x=6000, data-y=1000)
-      h1 Docker!
+      h1 docker!
       ul
-        li containerization
-        li easy management
-        li consistent app state
+        li isolation: containerization
+        li daemon: availability
+        li data containers: management
+      p: a(href='http://www.meetup.com/Docker-Budapest-Hungary/') (docker budapest meetup)
     .step(data-x=7500, data-y=0)
       h1 docker 101
       ul
-        li container ≈ virtual machine
-        li container ≈ isolated process
+        li container ≈≈≈ virtual machine
+        li container ≈≈ isolated process
         li container ≈ logical service
       br
       pre.
         $ docker run --rm busybox echo 'hello nodebp'
     .step(data-x=9000, data-y=0)
       h1 containers for sinopia
-      ul
-        li (TODO: replace this list with an image)
-        li sinopia
-        li nginx
-        li data
+      img(src='arch.png')
     .step(data-x=10500, data-y=0)
-      h1 data container & configs
-      pre.
-        $ docker run -d --name sinopia-container purpose/sinopia-container
-      p Edit the config
-      pre.
-        $ docker run -it --rm --volumes-from sinopia-container busybox vi
+      h1 demo time!
     .step(data-x=10500, data-y=1000)
-      h1 service containers
-      pre.
-        $ docker run -d --name sinopia \
-                     --volumes-from sinopia-container purpose/sinopia
-
-        $ docker run -d --name sinopia-nginx \
-                     --volumes-from sinopia-container \
-                     --link sinopia:sinopia \
-                     -p 443:443 -p 80:80 \
-                     purpose/sinopia-nginx
-    .step(data-x=10500, data-y=2000)
-      h1 backup
-      p no db, just files!
-      pre.
-        $ docker run -it --rm --volumes-from sinopia-container \
-                     -v $(pwd):/backup debian:jessie \ 
-                     tar -zcvf /backup/backup.tar.gz \
-                     -C /opt/sinopia/storage @nodebp
+      h1 questions?
+      ul.links
+        li http://github.com/purposeindustries/docker-sinopia{-container,-nginx,}
+        li http://registry.hub.docker.com/repos/purpose/sinopia{-container,-nginx,}
+        li http://madbence.github.io/nodebp-sinopia
   script(src='http://bartaz.github.io/impress.js/js/impress.js')
   script.
     impress().init()
