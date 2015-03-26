@@ -5,7 +5,7 @@
   "scripts": {
     "build": "jade -o dist index.jade",
     "build-bg": "npm run build -- --watch",
-    "publish-gh": "npm run build && git branch -D gh-pages; git checkout --orphan gh-pages && git rm -rf --ignore-unmatch node_modules index.jade .gitignore package.json && mv dist/index.html . && git add index.html && git commit -m 'Publish gh-pages' && git push --force origin gh-pages"
+    "publish-gh": "npm run build && git branch -D gh-pages; git checkout --orphan gh-pages && git rm -rf --ignore-unmatch node_modules index.jade .gitignore package.json && mv dist/* . && git add index.html arch.png && git commit -m 'Publish gh-pages' && git push --force origin gh-pages"
   },
   "repository": {
     "type": "git",
