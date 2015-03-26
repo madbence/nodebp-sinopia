@@ -39,10 +39,10 @@ html(lang='en')
         &.work
           margin-top 100px
           font-size 0.7em
-      colors = #e67e22 #f1c40f #2ecc71 #1abc9c #3498db #9b59b6 #be643c
-      for step in 1..30
+      colors = #e67e22 #f1c40f #2ecc71 #1abc9c #be643c
+      for step in 2..10
         .impress-on-step-{step}
-          background colors[step % 7]
+          background colors[step % 5]
   #impress
     .step(data-x=0, data-y=0)
       h1 private npm registry
