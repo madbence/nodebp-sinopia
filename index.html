@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="en"><title>Private NPM using Docker</title><style>
+@import url(http://fonts.googleapis.com/css?family=IM+Fell+English);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:300);
+h1,
+h2 {
+  font-family: 'IM Fell English' serif;
+}
+body {
+  background: #ecf0f1;
+  color: #2c3e50;
+  font-family: 'Roboto Slab' serif;
+  font-size: 40px;
+  transition: background 500ms;
+}
+a {
+  color: inherit;
+}
+.step {
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+}
+ul {
+  display: inline-block;
+  margin: 50px auto;
+  text-align: left;
+}
+ul.links {
+  font-size: 0.8em;
+}
+pre {
+  margin: 0 auto;
+  text-align: left;
+  display: inline-block;
+}
+p {
+  margin: 0;
+  margin-top: 20px;
+}
+p.me {
+  font-size: 0.8em;
+}
+p.work {
+  margin-top: 100px;
+  font-size: 0.7em;
+}
+.impress-on-step-1 {
+  background: #e67e22;
+}
+.impress-on-step-2 {
+  background: #f1c40f;
+}
+.impress-on-step-3 {
+  background: #2ecc71;
+}
+.impress-on-step-4 {
+  background: #1abc9c;
+}
+.impress-on-step-5 {
+  background: #3498db;
+}
+.impress-on-step-6 {
+  background: #e74c3c;
+}
+.impress-on-step-7 {
+  background: #e67e22;
+}
+.impress-on-step-8 {
+  background: #f1c40f;
+}
+.impress-on-step-9 {
+  background: #2ecc71;
+}
+.impress-on-step-10 {
+  background: #1abc9c;
+}
+</style><div id="impress"><div data-x='0' data-y='0' class="step"><h1>private npm registry</h1><p>with docker & sinopia</p><p class="me">bence dányi (@madbence)</p><p class="work">purpose industries</p></div><div data-x='1500' data-y='0' class="step"><h1>private packages</h1><ul><li>tarball ☹</li><li>git remote ☹</li><li>package ☺</li></ul><br><pre>$ npm install http://my-org.com/my-package.tar.gz
+
+$ npm install git://github.com/my-org/my-package.git
+$ npm install my-org/my-package
+
+$ npm install @my-org/my-package</pre></div><div data-x='3000' data-y='0' class="step"><h1>sinopia</h1><ul><li>zero conf</li><li>private registry</li><li>cache</li><li>audit packages</li><li>behind firewalls</li><li>simple storage (everyone ♥ files)</li><li>auth plugins (htpasswd, LDAP, etc.)</li></ul></div><div data-x='4500' data-y='0' class="step"><h1>usage</h1><pre>$ npm install -g sinopia
+$ sinopia
+
+
+$ npm install my-private-package --registry http://localhost:4873</pre></div><div data-x='6000' data-y='0' class="step"><h1>in production?</h1><ul><li>management</li><li>availability</li><li>isolation</li></ul></div><div data-x='6000' data-y='1000' class="step"><h1>docker!</h1><ul><li>isolation: containerization</li><li>daemon: availability</li><li>data containers: management</li></ul><p><a href="http://www.meetup.com/Docker-Budapest-Hungary/">(docker budapest meetup)</a></p></div><div data-x='7500' data-y='0' class="step"><h1>docker 101</h1><ul><li>container ≈≈≈ virtual machine</li><li>container ≈≈ isolated process</li><li>container ≈ logical service</li></ul><br><pre>$ docker run --rm busybox echo 'hello nodebp'</pre></div><div data-x='9000' data-y='0' class="step"><h1>containers for sinopia</h1><img src="arch.png"></div><div data-x='10500' data-y='0' class="step"><h1>demo time!</h1></div><div data-x='10500' data-y='1000' class="step"><h1>questions?</h1><ul class="links"><li>http://github.com/purposeindustries/docker-sinopia{-container,-nginx,}</li><li>http://registry.hub.docker.com/repos/purpose/sinopia{-container,-nginx,}</li><li>http://madbence.github.io/nodebp-sinopia</li></ul></div></div><script src="http://bartaz.github.io/impress.js/js/impress.js"></script><script>impress().init()</script></html>
